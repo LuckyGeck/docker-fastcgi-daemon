@@ -1,0 +1,30 @@
+fastcgi-daemon:
+  build: docker-fastcgi-daemon
+  restart: always
+  container_name: fastcgi-daemon
+  volumes:
+    - /tmp/fastcgi:/tmp/fastcgi
+    - ./fastcgi_data:data
+  ports:
+    - "8001:20012"
+
+nginx:
+  image: "nginx:1.9.4"
+  volumes:
+    - /tmp/fastcgi:/tmp/fastcgi
+    - ./fastcgi_data/default_nginx_site.conf:/etc/nginx/conf.d/default.conf
+    - ./logs:/var/log/nginx
+
+  restart: always
+  container_name: fastcgi-nginx
+  ports:
+   - "8000:80"
+
+builder:
+  build: docker-fastcgi-daemon
+  container_name: builder
+  volumes:
+    - ./src:/src
+    - ./fastcgi_data:/target
+  working_dir: "/src"
+  command: ["make"]
