@@ -10,4 +10,4 @@ restart:
 	docker-compose restart fastcgi-daemon
 
 build:
-	docker-compose start builder
+	docker-compose run --rm builder make
