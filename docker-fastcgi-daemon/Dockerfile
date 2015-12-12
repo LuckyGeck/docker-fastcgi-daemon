@@ -31,6 +31,6 @@ RUN mkdir -p /tmp/build_fastcgi && cd /tmp/build_fastcgi && \
         ./libfastcgi2-syslog_${FCGI_VERSION}_amd64.deb \
     && cd /tmp && rm -rf /tmp/build_fastcgi
 
-VOLUME ["data", "/tmp/fastcgi"]
-WORKDIR "data"
+VOLUME ["/data", "/tmp/fastcgi"]
+WORKDIR "/data"
 CMD ["fastcgi-daemon2", "--config=fastcgi.conf"]

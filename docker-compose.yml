@@ -4,7 +4,7 @@ fastcgi-daemon:
   container_name: fastcgi-daemon
   volumes:
     - /tmp/fastcgi:/tmp/fastcgi
-    - ./fastcgi_data:data
+    - ./fastcgi_data:/data
   ports:
     - "8001:20012"
 
